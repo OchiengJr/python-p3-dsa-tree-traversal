@@ -1,48 +1,47 @@
 from tree import Tree
 
 class TestStack:
-    '''Class Stack in Stack.py'''
+    """Test cases for the Tree class."""
 
     def test_get_element_by_id(self):
-  # <body>
-  #   <div id="main">
-  #     <h1 id="heading">Title</h1>
-  #     <h2>Subtitle</h2>
-  #   </div>
-  # </body>
+        """Test get_element_by_id method."""
 
-        '''get_element_by_id test'''
-    tree = Tree(
-      {
-        'tag_name': 'body',
-        'id': None,
-        'children': [
-          {
-            'tag_name': 'div',
-            'id': 'main',
-            'children': [
-              {
-                'tag_name': 'h1',
-                'id': 'heading',
-                'text_content': 'Title',
-                'children': []
-              },
-              {
-                'tag_name': 'h2',
+        # Define the tree structure
+        tree = Tree(
+            {
+                'tag_name': 'body',
                 'id': None,
-                'text_content': 'Subitle',
-                'children': []
-              }
-            ]
-          }
-        ]
-      }
-    )
-    assert(tree.get_element_by_id('heading') =={
-      'tag_name': 'h1',
-      'id': 'heading',
-      'text_content': 'Title',
-      'children': []
-    } )
+                'children': [
+                    {
+                        'tag_name': 'div',
+                        'id': 'main',
+                        'children': [
+                            {
+                                'tag_name': 'h1',
+                                'id': 'heading',
+                                'text_content': 'Title',
+                                'children': []
+                            },
+                            {
+                                'tag_name': 'h2',
+                                'id': None,
+                                'text_content': 'Subtitle',
+                                'children': []
+                            }
+                        ]
+                    }
+                ]
+            }
+        )
 
-    assert(tree.get_element_by_id('nope') == None)
+        # Test case: element with ID exists
+        expected_element = {
+            'tag_name': 'h1',
+            'id': 'heading',
+            'text_content': 'Title',
+            'children': []
+        }
+        assert tree.get_element_by_id('heading') == expected_element, "Element with ID 'heading' not found."
+
+        # Test case: element with ID does not exist
+        assert tree.get_element_by_id('nope') is None, "Element with ID 'nope' found unexpectedly."
